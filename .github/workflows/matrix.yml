@@ -2,20 +2,20 @@ name: Matric demo
 on: push
 jobs:
   build:
-  continue-on-error: true
-  strategy:
-    matrix:
-      node-versions: [12,13,14]
-      operating-systems: [unbuntu-latest, macos-latest]   
-    runs-on: ${{ matrix.operating-systems}}
-    steps:
-      - name: Get code
-        uses: actions/checkout@v4
-      - name: Install Node js 
-        uses: actions/setup-node@v4
-        with:
-          node-verion: $ {{ matrix.node-versions}}
-      - name: Install dependencies
-        run: npm ci
-      - name: build projet
-        run: npm run build 
+    continue-on-error: true
+    strategy:
+      matrix:
+        node-versions: [12,13,14]
+        operating-systems: [unbuntu-latest, macos-latest]   
+      runs-on: ${{ matrix.operating-systems}}
+      steps:
+        - name: Get code
+          uses: actions/checkout@v4
+        - name: Install Node js 
+          uses: actions/setup-node@v4
+          with:
+            node-verion: $ {{ matrix.node-versions}}
+        - name: Install dependencies
+          run: npm ci
+        - name: build projet
+          run: npm run build 
