@@ -1,0 +1,8 @@
+name: Reusable Deployment
+on: workflow_call
+jobs:
+  deployment:
+    runs-on: macos-latest
+    steps:
+      - name: Deploy code
+        run: echo "Building & Deploying"
