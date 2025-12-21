@@ -1,8 +1,21 @@
 name: Reusable Deployment
-on: workflow_call
+on: 
+  workflow_call:
+    inputs:
+      my-artifact-name:
+        description: the name of the deployable artifact
+        required: false
+        default: dist
+        type: string
+
+
 jobs:
   deployment:
     runs-on: macos-latest
     steps:
+      - name: Get code
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ inputs.my-artifact-name}}
       - name: Deploy code
         run: echo "Building & Deploying"
