@@ -7,10 +7,20 @@ on:
         required: false
         default: dist
         type: string
+    outputs:
+      step-result:
+        description: The output description
+        value: ${{ jobs.deployment.outputs.outcome }}
+    #secrets:
+      #some-secrets:
+        #required: true
+
 
 
 jobs:
   deployment:
+    outputs:
+      outcome: ${{ steps.set-results.outputs.step-result }}
     runs-on: macos-latest
     steps:
       - name: Get code
@@ -19,3 +29,6 @@ jobs:
           name: ${{ inputs.my-artifact-name}}
       - name: Deploy code
         run: echo "Building & Deploying"
+      - name: Set result output
+        id: set-results
+        run: echo "step-result=success" >> $GITHUB_OUTPUT
